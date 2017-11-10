@@ -17,6 +17,14 @@ public class Board {
 		}
 	}
 	
+	public void setSymbolAt(int row, int col, char symbol) {
+		this.board[row-1][col-1] = symbol;
+	}
+	
+	public char getSymbolAt(int row, int col) {
+		return board[row-1][col-1];
+	}
+	
 	public void printBoard() {
 		System.out.println("-------------");
 		for (int i = 0; i < 3; i++) {
