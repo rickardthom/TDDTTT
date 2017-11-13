@@ -63,6 +63,13 @@ public class RulesTest {
 	public void testPlayerWonNoWinner() {
 		this.st_board = new BoardStub();
 		st_board.setFullBoardWithNoWinner();
+		assertFalse(rules.playerWon(st_board));
+	}
+	
+	@Test
+	public void testPlayerWonNWihWinner() {
+		this.st_board = new BoardStub();
+		st_board.setDiagWinBoard();
 		assertTrue(rules.playerWon(st_board));
 	}
 	
