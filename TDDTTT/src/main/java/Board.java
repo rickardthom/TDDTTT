@@ -21,6 +21,10 @@ public class Board {
 		this.board[row-1][col-1] = symbol;
 	}
 	
+	public boolean validateRowCol(int usr_row, int usr_col) {
+		return false;
+	}
+	
 	public char[][] getBoard(){
 		return board;
 	}

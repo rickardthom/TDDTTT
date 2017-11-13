@@ -17,6 +17,16 @@ public class BoardTest {
 		assertEquals(board.getSymbolAt(3,3), 'X');
 	}
 	
+	@Test 
+	public void invalidRangeRowCol() {
+		assertFalse(board.validateRowCol(3,4));
+	}
+	
+	@Test 
+	public void validRangeRowCol() {
+		assertTrue(board.validateRowCol(3,3));
+	}
+	
 	public class BoardStub extends Board {
 		
 		public char getSymbolAt(int row, int col) {
