@@ -52,6 +52,20 @@ public class RulesTest {
 		assertFalse(rules.diagWin(st_board));
 	}
 	
+	@Test
+	public void testBoardIsFull() {
+		this.st_board = new BoardStub();
+		st_board.setFullBoardWithNoWinner();
+		assertTrue(rules.boardIsFull(st_board));
+	}
+	
+	@Test
+	public void testPlayerWonNoWinner() {
+		this.st_board = new BoardStub();
+		st_board.setFullBoardWithNoWinner();
+		assertTrue(rules.playerWon(st_board));
+	}
+	
 	class BoardStub extends Board {
 		
 		public void setColWinBoard(){
@@ -88,8 +102,6 @@ public class RulesTest {
 			setSymbolAt(3, 1, 'X');
 			setSymbolAt(3, 2, 'O');
 			setSymbolAt(3, 3, 'X');
-			
 		}
-			
-}
+	}
 }

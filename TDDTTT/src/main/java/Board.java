@@ -1,6 +1,6 @@
 
 public class Board {
-	private char[][] board;
+	protected char[][] board;
 	private int row = 3;
 	private int col = 3;
 	
@@ -19,10 +19,6 @@ public class Board {
 	
 	public void setSymbolAt(int row, int col, char symbol) {
 		this.board[row-1][col-1] = symbol;
-	}
-	
-	public char getSymbolAt(int row, int col) {
-		return board[row-1][col-1];
 	}
 	
 	public char[][] getBoard(){
