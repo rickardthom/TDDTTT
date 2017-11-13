@@ -13,24 +13,24 @@ public class BoardTest {
 	
 	@Test 
 	public void placeSymbolTest() {
-		board.setSymbolAt(3, 3, 'X');
-		assertEquals(board.getSymbolAt(3,3), 'X');
+		board.setSymbolAt(2, 2, 'X');
+		assertEquals(board.getSymbolAt(2,2), 'X');
 	}
 	
 	@Test 
 	public void invalidRangeRowCol() {
-		assertFalse(board.validateRowCol(3,4));
+		assertFalse(board.validateRowCol(1,4));
 	}
 	
 	@Test 
 	public void validRangeRowCol() {
-		assertTrue(board.validateRowCol(3,3));
+		assertTrue(board.validateRowCol(2,2));
 	}
 	
 	public class BoardStub extends Board {
 		
 		public char getSymbolAt(int row, int col) {
-			return board[row-1][col-1];
+			return board[row][col];
 		}
 	}
 }

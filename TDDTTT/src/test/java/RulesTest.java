@@ -76,22 +76,22 @@ public class RulesTest {
 	class BoardStub extends Board {
 		
 		public void setColWinBoard(){
-			setSymbolAt(1, 1, 'X');
-			setSymbolAt(2, 1, 'X');
-			setSymbolAt(3, 1, 'X');
+			setSymbolAt(0, 0, 'X');
+			setSymbolAt(1, 0, 'X');
+			setSymbolAt(2, 0, 'X');
 		}
 		
 		public void setRowWinBoard(){
-			setSymbolAt(1, 1, 'X');
-			setSymbolAt(1, 2, 'X');
-			setSymbolAt(1, 3, 'X');
+			setSymbolAt(0, 0, 'X');
+			setSymbolAt(0, 1, 'X');
+			setSymbolAt(0, 2, 'X');
 			
 		}
 		
 		public void setDiagWinBoard(){
+			setSymbolAt(0, 0, 'X');
 			setSymbolAt(1, 1, 'X');
 			setSymbolAt(2, 2, 'X');
-			setSymbolAt(3, 3, 'X');
 		}
 		
 		/*
@@ -100,15 +100,15 @@ public class RulesTest {
 							{'X','O','X'}};
 		*/
 		public void setFullBoardWithNoWinner(){
-			setSymbolAt(1, 1, 'X');
+			setSymbolAt(0, 0, 'X');
+			setSymbolAt(0, 1, 'X');
+			setSymbolAt(0, 2, 'O');
+			setSymbolAt(1, 0, 'O');
+			setSymbolAt(1, 1, 'O');
 			setSymbolAt(1, 2, 'X');
-			setSymbolAt(1, 3, 'O');
+			setSymbolAt(2, 0, 'X');
 			setSymbolAt(2, 1, 'O');
-			setSymbolAt(2, 2, 'O');
-			setSymbolAt(2, 3, 'X');
-			setSymbolAt(3, 1, 'X');
-			setSymbolAt(3, 2, 'O');
-			setSymbolAt(3, 3, 'X');
+			setSymbolAt(2, 2, 'X');
 		}
 	}
 }

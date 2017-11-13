@@ -18,10 +18,17 @@ public class Board {
 	}
 	
 	public void setSymbolAt(int row, int col, char symbol) {
-		this.board[row-1][col-1] = symbol;
+		this.board[row][col] = symbol;
 	}
 	
 	public boolean validateRowCol(int usr_row, int usr_col) {
+		if((usr_row >= 0) && (usr_row < 3)){
+			if((usr_col >= 0) && (usr_col < 3)) {
+				if(board[usr_row][usr_col] == '-') {
+					return true;
+				}
+			}
+		}
 		return false;
 	}
 	
