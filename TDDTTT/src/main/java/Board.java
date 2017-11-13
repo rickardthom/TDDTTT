@@ -1,6 +1,6 @@
 
 public class Board {
-	protected char[][] board;
+	private char[][] board;
 	private int row = 3;
 	private int col = 3;
 	
@@ -23,6 +23,10 @@ public class Board {
 	
 	public char getSymbolAt(int row, int col) {
 		return board[row-1][col-1];
+	}
+	
+	public char[][] getBoard(){
+		return board;
 	}
 	
 	public void printBoard() {
