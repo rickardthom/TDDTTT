@@ -1,23 +1,23 @@
 
 public class Rules {
 
-	public boolean checkIfBoardFull(Board board){
+	public boolean boardIsFull(Board board){
 		return false;
 	}
 	
-	public boolean checkIfPlayerWon(Board board) {
+	public boolean playerWon(Board board) {
 		return false;
 	}
 	
-	public boolean checkForColWin() {
+	public boolean colWin(Board board) {
 		return false;
 	}
 	
-	public boolean checkForRowWin() {
+	public boolean rowWin(Board board) {
 		return false;
 	}
 	
-	public boolean checkForDiagWin() {
+	public boolean diagWin(Board board) {
 		return false;
 	}
 }

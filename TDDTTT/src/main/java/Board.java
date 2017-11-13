@@ -1,6 +1,6 @@
 
 public class Board {
-	private char[][] board;
+	protected char[][] board;
 	private int row = 3;
 	private int col = 3;
 	
@@ -10,8 +10,8 @@ public class Board {
 	}
 	
 	public void initBoard() {
-		for (int i = 0; i < col; i++) {
-			for (int x = 0; x < row; x++) {
+		for (int i = 0; i < row; i++) {
+			for (int x = 0; x < col; x++) {
 				this.board[i][x] = '-';
 			}
 		}
