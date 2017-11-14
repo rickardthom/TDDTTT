@@ -3,7 +3,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-//Covers 56% of Player
+//Covers 100% of Player
 public class PlayerTest {
 
 	Player player;
@@ -21,9 +21,26 @@ public class PlayerTest {
 	
 	@Test
 	public void testSymbol() {
-		char pl_symb = player.getSymbol();
-		assertEquals(pl_symb, 'X');
+		char symbol = player.getSymbol();
+		assertEquals(symbol, 'X');
 	}
 	
+	@Test
+	public void testName() {
+		String name = player.getName();
+		assertEquals(name, "Player 1");
+	}
+	
+	@Test
+	public void testColAndRow() {
+		player.setCol(0);
+		player.setRow(2);
+		
+		player.getRow();
+		player.getCol();
+		
+		assertEquals(2, player.getRow());
+		assertEquals(0, player.getCol());
+	}
 
 }
