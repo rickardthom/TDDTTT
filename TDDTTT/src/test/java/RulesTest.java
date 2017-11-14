@@ -53,13 +53,6 @@ public class RulesTest {
 	}
 	
 	@Test
-	public void testBoardIsFull() {
-		this.st_board = new BoardStub();
-		st_board.setFullBoardWithNoWinner();
-		assertTrue(rules.boardIsFull(st_board));
-	}
-	
-	@Test
 	public void testPlayerWonNoWinner() {
 		this.st_board = new BoardStub();
 		st_board.setFullBoardWithNoWinner();

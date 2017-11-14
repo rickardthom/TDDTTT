@@ -12,7 +12,7 @@ public class Board {
 	public void initBoard() {
 		for (int i = 0; i < row; i++) {
 			for (int x = 0; x < col; x++) {
-				this.board[i][x] = '-';
+				board[i][x] = '-';
 			}
 		}
 	}
@@ -34,6 +34,17 @@ public class Board {
 	
 	public char[][] getBoard(){
 		return board;
+	}
+	
+	public boolean isFull(){
+		for (int i = 0; i < 3; i++) {
+			for (int x = 0; x < 3; x++) {
+				if (board[i][x] == '-') {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 	
 	public void printBoard() {

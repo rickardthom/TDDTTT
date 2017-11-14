@@ -1,19 +1,5 @@
 
 public class Rules {
-
-	public boolean boardIsFull(Board board){
-		char[][] char_arr = board.getBoard();
-		
-		for (int i = 0; i < 3; i++) {
-			for (int x = 0; x < 3; x++) {
-				if (char_arr[i][x] == '-') {
-					return false;
-				}
-			}
-		}
-		
-		return true;
-	}
 	
 	public boolean playerWon(Board board) {
 		return colWin(board) || rowWin(board) || diagWin(board);
