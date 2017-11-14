@@ -8,7 +8,7 @@ import org.junit.runners.Suite.SuiteClasses;
     BoardTest.class,
     RulesTest.class,
     PlayerTest.class,
-    GameManagerTest.class
+    UserInputTest.class
 })
 
 public class AllTests {
