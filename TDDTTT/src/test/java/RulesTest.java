@@ -3,6 +3,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+//Covers 100% of Rules
 public class RulesTest {
 	Rules rules;
 	BoardStub st_board;

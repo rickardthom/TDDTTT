@@ -3,6 +3,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+//Covers 50% of board
 public class BoardTest {
 	BoardStub board;
 	
