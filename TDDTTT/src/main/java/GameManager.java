@@ -6,16 +6,44 @@ public class GameManager {
 	private Player player_1 = new Player("Player 1", 'X');
 	protected Player player_2 = new Player("Player 2", 'O');
 	protected Player current_player = player_1;
+	private boolean game_active = true;
 	
 	public void start() {
 		showTitle();
 		
-		while(true) {
+		while(game_active) {
 			board.printBoard();
 			while(!getUserRowCol(new UserInput(System.in, System.out)));
 			board.setSymbolAt(current_player.getRow(), current_player.getCol(), current_player.getSymbol());
+			game_active = checkGameState();
 		}
 		
+	}
+	
+	private boolean checkGameState() {
+		if (rules.playerWon(board)) {
+			System.out.println("\n" + current_player.getName() + " won!\n");
+			current_player.incrScore();
+			return rematch(new UserInput(System.in, System.out));
+			
+		}else if(board.isFull()) {
+			System.out.print("Board is full, game is a draw!");
+			return rematch(new UserInput(System.in, System.out));
+			
+		}else {
+			changePlayer();
+			return true;
+		}
+	}
+	
+	private boolean rematch(UserInput user_input) {
+		char input = user_input.askUserForChar("Play again (y/n): ");
+		if(input == 'y') {
+			board.initBoard();
+			return true;
+		}else {
+			return false;
+		}
 	}
 	
 	public boolean getUserRowCol(UserInput user_input) {
@@ -31,10 +59,6 @@ public class GameManager {
 		}else {
 			current_player = player_1;
 		}
-	}
-	
-	public void randomStartingPlayer() {
-		
 	}
 	
 	public void showTitle() {

@@ -43,9 +43,5 @@ public class GameManagerTest {
 		public Player getCurrentPlayer() {
 			return current_player;
 		}
-		
-		public Player getPlayer2() {
-			return player_2;
-		}
 	}
 }
