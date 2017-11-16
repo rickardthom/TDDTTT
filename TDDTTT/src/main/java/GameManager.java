@@ -26,7 +26,11 @@ public class GameManager {
 	}
 	
 	public void changePlayer() {
-		
+		if(current_player == player_1) {
+			this.current_player = player_2;
+		}else {
+			this.current_player = player_1;
+		}
 	}
 	
 	public void randomStartingPlayer() {
