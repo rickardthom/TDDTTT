@@ -1,7 +1,8 @@
 import static org.junit.Assert.*;
+
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.times;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -15,25 +16,17 @@ public class GameManagerTest {
 	}
 
 	@Test
-	public void getIntUserInputAsValidIntTest() {
-	    UserInput user_input = mock(UserInput.class);
-	    
-	    when(user_input.askUserForInt("Give a number between 1 and 3")).thenReturn(1);
-	    
-	    assertEquals(game_manager.getUserRowCol(user_input), 1);
+	public void getUserRowColTest() {
+		UserInput user_input = mock(UserInput.class);
+		game_manager.getUserRowCol(user_input);
+		
+		verify(user_input, times(1)).askUserForInt("row: ");
+		verify(user_input, times(1)).askUserForInt("col: ");
 	}
 	
-	@Test
-	public void getIntUserInputAsInvalidIntTest() {
-	    UserInput user_input = mock(UserInput.class);
-	    
-	    when(user_input.askUserForInt("Give a number between 1 and 3")).thenReturn(4);
-	    when(user_input.askUserForInt("Wrong number, try again.")).thenReturn(3);
-	    
-	    game_manager.getUserRowCol(user_input);
-	    
-	    verify(user_input).askUserForInt("Wrong number, try again.");
-	    
+	// no exception expected
+	@Test(expected = Test.None.class)
+	public void showTitleTest() {
+		game_manager.showTitle();
 	}
-
 }

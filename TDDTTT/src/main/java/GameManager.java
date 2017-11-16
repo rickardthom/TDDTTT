@@ -3,7 +3,6 @@
 public class GameManager {
 	private Board board = new Board();
 	private Rules rules = new Rules();
-	private UserInput user_input = new UserInput(System.in, System.out);
 	private Player player_1 = new Player("Player 1", 'X');
 	private Player player_2 = new Player("Player 2", 'O');
 	private Player current_player = player_1;
@@ -13,13 +12,13 @@ public class GameManager {
 		
 		while(true) {
 			board.printBoard();
-			while(!getUserRowCol());
+			while(!getUserRowCol(new UserInput(System.in, System.out)));
 			board.setSymbolAt(current_player.getRow(), current_player.getCol(), current_player.getSymbol());
 		}
 		
 	}
 	
-	public boolean getUserRowCol() {
+	public boolean getUserRowCol(UserInput user_input) {
 		System.out.println("\n" + current_player.getName() + ", place your marker '" + current_player.getSymbol() + "' in an empty spot! (0-2)");
 		current_player.setRow(user_input.askUserForInt("row: "));
 		current_player.setCol(user_input.askUserForInt("col: "));
@@ -34,7 +33,7 @@ public class GameManager {
 		
 	}
 	
-	private void showTitle() {
+	public void showTitle() {
 		System.out.println("Tic Tac Toe \n");
 		System.out.println(player_1.getName() + " score: " + player_1.getScore());
 		System.out.println(player_2.getName() + " score: " + player_2.getScore());
