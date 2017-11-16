@@ -39,7 +39,9 @@ public class GameManagerTest {
 	}
 	
 	public class GameManagerStub extends GameManager {
-		
+		public GameManagerStub() {
+			super(new Board(), new Rules(), new Player("Player 1", 'X'), new Player("Player 2", 'O'));
+		}
 		public Player getCurrentPlayer() {
 			return current_player;
 		}
