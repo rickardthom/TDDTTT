@@ -4,8 +4,8 @@ public class GameManager {
 	private Board board = new Board();
 	private Rules rules = new Rules();
 	private Player player_1 = new Player("Player 1", 'X');
-	private Player player_2 = new Player("Player 2", 'O');
-	private Player current_player = player_1;
+	protected Player player_2 = new Player("Player 2", 'O');
+	protected Player current_player = player_1;
 	
 	public void start() {
 		showTitle();
@@ -27,9 +27,9 @@ public class GameManager {
 	
 	public void changePlayer() {
 		if(current_player == player_1) {
-			this.current_player = player_2;
+			current_player = player_2;
 		}else {
-			this.current_player = player_1;
+			current_player = player_1;
 		}
 	}
 	
