@@ -8,7 +8,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
 
-
 public class UserInputTest {
 
 	@Test
@@ -20,16 +19,15 @@ public class UserInputTest {
 		System.setOut(new PrintStream(os));
 		
 	    InputStream in = new ByteArrayInputStream(input.getBytes());
-	    
 	    System.setIn(in);
 
-	    UserInput inputOutput= new UserInput(System.in, System.out);
-	    int val = inputOutput.askUserForInt(message);
+	    UserInput user_input= new UserInput(System.in, System.out);
+	    int val = user_input.askUserForInt(message);
 	    
-	    String real_output = os.toString();
+	    String output = os.toString();
 	    
 		assertEquals(5, val);
-		assertTrue(real_output.contains(message));
+		assertTrue(output.contains(message));
 	}
 	
 	@Test
@@ -43,12 +41,12 @@ public class UserInputTest {
 		InputStream in = new ByteArrayInputStream(input.getBytes());
 	    
 	    System.setIn(in);
-	    UserInput inputOutput= new UserInput(System.in, System.out);
+	    UserInput user_input= new UserInput(System.in, System.out);
 	    
-	    char val = (char)inputOutput.askUserForChar(message);
+	    char val = (char)user_input.askUserForChar(message);
 	    
-	    String real_output = os.toString();
+	    String output = os.toString();
 		assertEquals('y', val);
-		assertTrue(real_output.contains(message));
+		assertTrue(output.contains(message));
 	}
 }

@@ -12,12 +12,12 @@ public class UserInput {
 	}
 	
     public int askUserForInt(String message) {
-        out.println(message);
+        out.print(message);
         return scanner.nextInt();
     }
     
     public char askUserForChar(String message) {
-        out.println(message);
+        out.print(message);
         return scanner.next().charAt(0);
     }
 }
