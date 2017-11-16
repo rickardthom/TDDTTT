@@ -13,7 +13,7 @@ public class GameManagerTest {
 	public void setupTest() {
 		this.game_manager = new GameManager();
 	}
-	/*
+
 	@Test
 	public void getIntUserInputAsValidIntTest() {
 	    UserInput user_input = mock(UserInput.class);
@@ -35,5 +35,5 @@ public class GameManagerTest {
 	    verify(user_input).askUserForInt("Wrong number, try again.");
 	    
 	}
-	*/
+
 }
