@@ -23,28 +23,31 @@ public class GameManager {
 			board.printBoard();
 			while(!getUserRowCol(new UserInput(System.in, System.out)));
 			board.setSymbolAt(current_player.getRow(), current_player.getCol(), current_player.getSymbol());
-			game_active = checkGameState();
+			
+			if(roundHasEnded()) {
+				game_active = playAgain(new UserInput(System.in, System.out));
+			}
 		}
 	}
 	
-	private boolean checkGameState() {
+	private boolean roundHasEnded() {
 		if (rules.playerWon(board)) {
 			System.out.println("\n" + current_player.getName() + " won!\n");
 			current_player.incrScore();
-			return playAgain(new UserInput(System.in, System.out));
+			return true;
 			
 		}else if(board.isFull()) {
 			System.out.print("Board is full, game is a draw!");
-			return playAgain(new UserInput(System.in, System.out));
+			return true;
 			
 		}else {
 			changePlayer();
-			return true;
+			return false;
 		}
 	}
 	
-	private boolean playAgain(UserInput user_input) {
-		char input = user_input.askUserForChar("Play again (y/n): ");
+	protected boolean playAgain(UserInput user_input) {
+		char input = user_input.askUserForChar("Play again (yes=y/n=any key): ");
 		if(input == 'y') {
 			board.initBoard();
 			return true;
