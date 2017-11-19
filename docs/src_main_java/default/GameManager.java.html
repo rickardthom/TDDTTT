@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="sv"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>GameManager.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">AllTests (2017-nov-19 11:50:02)</a> &gt; <a href="../../index.html" class="el_group">TDDTTT</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">GameManager.java</span></div><h1>GameManager.java</h1><pre class="source lang-java linenums">
+
+public class GameManager {
+	private Board board;
+	private Rules rules;
+	private Player player_1;
+	protected Player player_2;
+	protected Player current_player;
+<span class="fc" id="L9">	private boolean game_active = true;</span>
+	
+<span class="fc" id="L11">	public GameManager(Board board, Rules rules, Player player_1, Player player_2) {</span>
+<span class="fc" id="L12">		this.board = board;</span>
+<span class="fc" id="L13">		this.rules = rules;</span>
+<span class="fc" id="L14">		this.player_1  = player_1;</span>
+<span class="fc" id="L15">		this.player_2 = player_2;</span>
+<span class="fc" id="L16">		this.current_player = player_1;</span>
+<span class="fc" id="L17">	}</span>
+	
+	public void play(UserInput user_input) {
+<span class="fc" id="L20">		showTitle();</span>
+<span class="fc" id="L21">		board.printBoard();</span>
+<span class="pc bpc" id="L22" title="1 of 2 branches missed.">		while(!getUserRowCol(user_input));</span>
+<span class="fc" id="L23">		board.setSymbolAt(current_player.getRow(), current_player.getCol(), current_player.getSymbol());</span>
+			
+<span class="fc bfc" id="L25" title="All 2 branches covered.">		if(roundHasEnded()) {</span>
+<span class="fc" id="L26">			game_active = playAgain(user_input);</span>
+<span class="fc" id="L27">		}else {</span>
+<span class="fc" id="L28">			changePlayer();</span>
+		}
+<span class="fc" id="L30">	}</span>
+
+	
+	protected boolean roundHasEnded() {
+<span class="fc bfc" id="L34" title="All 2 branches covered.">		if (rules.playerWon(board)) {</span>
+<span class="fc" id="L35">			System.out.println(&quot;\n&quot; + current_player.getName() + &quot; won!\n&quot;);</span>
+<span class="fc" id="L36">			current_player.incrScore();</span>
+<span class="fc" id="L37">			return true;</span>
+			
+<span class="fc bfc" id="L39" title="All 2 branches covered.">		}else if(board.isFull()) {</span>
+<span class="fc" id="L40">			System.out.print(&quot;Board is full, game is a draw!&quot;);</span>
+<span class="fc" id="L41">			return true;</span>
+			
+		}else {
+<span class="fc" id="L44">			return false;</span>
+		}
+	}
+	
+	protected boolean playAgain(UserInput user_input) {
+<span class="fc" id="L49">		char input = user_input.askUserForChar(&quot;Play again (yes=y/n=any key): &quot;);</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">		if(input == 'y') {</span>
+<span class="fc" id="L51">			board.initBoard();</span>
+<span class="fc" id="L52">			return true;</span>
+		}else {
+<span class="fc" id="L54">			return false;</span>
+		}
+	}
+	
+	public boolean getUserRowCol(UserInput user_input) {
+<span class="fc" id="L59">		System.out.println(&quot;\n&quot; + current_player.getName() + &quot;, place your marker '&quot; + current_player.getSymbol() + &quot;' in an empty spot! (0-2)&quot;);</span>
+<span class="fc" id="L60">		current_player.setRow(user_input.askUserForInt(&quot;row: &quot;));</span>
+<span class="fc" id="L61">		current_player.setCol(user_input.askUserForInt(&quot;col: &quot;));</span>
+<span class="fc" id="L62">		return board.validateRowCol(current_player.getRow(), current_player.getCol());</span>
+	}
+	
+	public void changePlayer() {
+<span class="fc bfc" id="L66" title="All 2 branches covered.">		if(current_player == player_1) {</span>
+<span class="fc" id="L67">			current_player = player_2;</span>
+<span class="fc" id="L68">		}else {</span>
+<span class="fc" id="L69">			current_player = player_1;</span>
+		}
+<span class="fc" id="L71">	}</span>
+	
+	public void showTitle() {
+<span class="fc" id="L74">		System.out.println(&quot;Tic Tac Toe \n&quot;);</span>
+<span class="fc" id="L75">		System.out.println(player_1.getName() + &quot; score: &quot; + player_1.getScore());</span>
+<span class="fc" id="L76">		System.out.println(player_2.getName() + &quot; score: &quot; + player_2.getScore());</span>
+<span class="fc" id="L77">		System.out.println(&quot;&quot;);</span>
+<span class="fc" id="L78">	}</span>
+	
+	public boolean isRunning() {
+<span class="nc" id="L81">		return game_active;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span>AllTests (2017-nov-19 11:50:02)</div></body></html>

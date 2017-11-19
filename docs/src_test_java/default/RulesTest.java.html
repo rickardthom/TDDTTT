@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="sv"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>RulesTest.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">AllTests (2017-nov-19 11:50:02)</a> &gt; <a href="../../index.html" class="el_group">TDDTTT</a> &gt; <a href="../index.html" class="el_bundle">src/test/java</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">RulesTest.java</span></div><h1>RulesTest.java</h1><pre class="source lang-java linenums">import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
+//Covers 100% of Rules
+<span class="fc" id="L7">public class RulesTest {</span>
+	Rules rules;
+	BoardStub st_board;
+	
+	@Before
+	public void setupTest() {
+<span class="fc" id="L13">		this.rules = new Rules();</span>
+<span class="fc" id="L14">	}</span>
+	
+	@Test
+	public void testColWin() {
+<span class="fc" id="L18">		this.st_board = new BoardStub();</span>
+<span class="fc" id="L19">		st_board.setColWinBoard();</span>
+<span class="fc" id="L20">		assertTrue(rules.colWin(st_board));</span>
+<span class="fc" id="L21">	}</span>
+	
+	@Test
+	public void testRowWin() {
+<span class="fc" id="L25">		this.st_board = new BoardStub();</span>
+<span class="fc" id="L26">		st_board.setRowWinBoard();</span>
+<span class="fc" id="L27">		assertTrue(rules.rowWin(st_board));</span>
+<span class="fc" id="L28">	}</span>
+	
+	@Test
+	public void testDiagWin() {
+<span class="fc" id="L32">		this.st_board = new BoardStub();</span>
+<span class="fc" id="L33">		st_board.setDiagWinBoard();</span>
+<span class="fc" id="L34">		assertTrue(rules.diagWin(st_board));</span>
+<span class="fc" id="L35">	}</span>
+	
+	@Test
+	public void testFullBoardNoWinner() {
+<span class="fc" id="L39">		this.st_board = new BoardStub();</span>
+<span class="fc" id="L40">		st_board.setFullBoardWithNoWinner();</span>
+		
+<span class="fc" id="L42">		assertFalse(rules.colWin(st_board));</span>
+<span class="fc" id="L43">		assertFalse(rules.rowWin(st_board));</span>
+<span class="fc" id="L44">		assertFalse(rules.diagWin(st_board));</span>
+<span class="fc" id="L45">	}</span>
+	
+	@Test
+	public void testEmptyBoard() {
+<span class="fc" id="L49">		this.st_board = new BoardStub();</span>
+		
+<span class="fc" id="L51">		assertFalse(rules.colWin(st_board));</span>
+<span class="fc" id="L52">		assertFalse(rules.rowWin(st_board));</span>
+<span class="fc" id="L53">		assertFalse(rules.diagWin(st_board));</span>
+<span class="fc" id="L54">	}</span>
+	
+	@Test
+	public void testPlayerWonNoWinner() {
+<span class="fc" id="L58">		this.st_board = new BoardStub();</span>
+<span class="fc" id="L59">		st_board.setFullBoardWithNoWinner();</span>
+<span class="fc" id="L60">		assertFalse(rules.playerWon(st_board));</span>
+<span class="fc" id="L61">	}</span>
+	
+	@Test
+	public void testPlayerWonNWihWinner() {
+<span class="fc" id="L65">		this.st_board = new BoardStub();</span>
+<span class="fc" id="L66">		st_board.setDiagWinBoard();</span>
+<span class="fc" id="L67">		assertTrue(rules.playerWon(st_board));</span>
+<span class="fc" id="L68">	}</span>
+	
+<span class="fc" id="L70">	class BoardStub extends Board {</span>
+		
+		public void setColWinBoard(){
+<span class="fc" id="L73">			setSymbolAt(0, 0, 'X');</span>
+<span class="fc" id="L74">			setSymbolAt(1, 0, 'X');</span>
+<span class="fc" id="L75">			setSymbolAt(2, 0, 'X');</span>
+<span class="fc" id="L76">		}</span>
+		
+		public void setRowWinBoard(){
+<span class="fc" id="L79">			setSymbolAt(0, 0, 'X');</span>
+<span class="fc" id="L80">			setSymbolAt(0, 1, 'X');</span>
+<span class="fc" id="L81">			setSymbolAt(0, 2, 'X');</span>
+			
+<span class="fc" id="L83">		}</span>
+		
+		public void setDiagWinBoard(){
+<span class="fc" id="L86">			setSymbolAt(0, 0, 'X');</span>
+<span class="fc" id="L87">			setSymbolAt(1, 1, 'X');</span>
+<span class="fc" id="L88">			setSymbolAt(2, 2, 'X');</span>
+<span class="fc" id="L89">		}</span>
+		
+		/*
+		char [][] board =  {{'X','X','O'}, 
+							{'O','O','X'}, 
+							{'X','O','X'}};
+		*/
+		public void setFullBoardWithNoWinner(){
+<span class="fc" id="L97">			setSymbolAt(0, 0, 'X');</span>
+<span class="fc" id="L98">			setSymbolAt(0, 1, 'X');</span>
+<span class="fc" id="L99">			setSymbolAt(0, 2, 'O');</span>
+<span class="fc" id="L100">			setSymbolAt(1, 0, 'O');</span>
+<span class="fc" id="L101">			setSymbolAt(1, 1, 'O');</span>
+<span class="fc" id="L102">			setSymbolAt(1, 2, 'X');</span>
+<span class="fc" id="L103">			setSymbolAt(2, 0, 'X');</span>
+<span class="fc" id="L104">			setSymbolAt(2, 1, 'O');</span>
+<span class="fc" id="L105">			setSymbolAt(2, 2, 'X');</span>
+<span class="fc" id="L106">		}</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span>AllTests (2017-nov-19 11:50:02)</div></body></html>

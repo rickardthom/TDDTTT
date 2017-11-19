@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="sv"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>TTT.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">AllTests (2017-nov-14 09:28:25)</a> &gt; <a href="../../index.html" class="el_group">TDDTTT</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">TTT.java</span></div><h1>TTT.java</h1><pre class="source lang-java linenums">import java.util.Scanner;
+
+public class TTT {
+<span class="nc" id="L4">	Scanner scanner = new Scanner(System.in);</span>
+<span class="nc" id="L5">	private Board board = new Board();</span>
+<span class="nc" id="L6">	private Rules rules = new Rules();</span>
+<span class="nc" id="L7">	private Player player_1 = new Player(&quot;Player 1&quot;, 'X');</span>
+<span class="nc" id="L8">	private Player player_2 = new Player(&quot;Player 2&quot;, 'O');</span>
+<span class="nc" id="L9">	protected Player current_player = player_1;</span>
+	
+<span class="nc" id="L11">	public TTT() {}</span>
+	
+	public void start() {
+<span class="nc" id="L14">		showTitle();</span>
+<span class="nc" id="L15">		boolean run = true;</span>
+		
+<span class="nc bnc" id="L17" title="All 2 branches missed.">		while(run) {</span>
+<span class="nc" id="L18">			board.printBoard();</span>
+			
+<span class="nc bnc" id="L20" title="All 2 branches missed.">			while(!getUserRowCol());</span>
+<span class="nc" id="L21">			board.setSymbolAt(current_player.getCol(), current_player.getCol(), current_player.getSymbol());</span>
+			
+<span class="nc bnc" id="L23" title="All 2 branches missed.">			if (rules.playerWon(board)) {</span>
+<span class="nc" id="L24">				System.out.println(&quot;\n&quot; + current_player.getName() + &quot; won!\n&quot;);</span>
+<span class="nc" id="L25">				current_player.incrScore();</span>
+<span class="nc" id="L26">				run = rematch();</span>
+				
+<span class="nc bnc" id="L28" title="All 2 branches missed.">			}else if(board.isFull()) {</span>
+<span class="nc" id="L29">				System.out.print(&quot;Board is full, game is a draw!&quot;);</span>
+<span class="nc" id="L30">				run = rematch();</span>
+				
+<span class="nc" id="L32">			}else {</span>
+<span class="nc" id="L33">				changePlayer();</span>
+			}
+		}
+<span class="nc" id="L36">	}</span>
+	
+	private boolean rematch() {
+<span class="nc" id="L39">		scanner.nextLine();</span>
+<span class="nc" id="L40">		System.out.print(&quot;Play again (y/n): &quot;);</span>
+<span class="nc" id="L41">		char input = scanner.next().charAt(0);</span>
+<span class="nc bnc" id="L42" title="All 2 branches missed.">		if(input == 'y') {</span>
+<span class="nc" id="L43">			board.initBoard();</span>
+<span class="nc" id="L44">			return true;</span>
+		}else {
+<span class="nc" id="L46">			return false;</span>
+		}
+	}
+	
+	private boolean getUserRowCol() {
+<span class="nc" id="L51">		System.out.println(&quot;\n&quot; + current_player.getName() + &quot;, place your marker '&quot; + current_player.getSymbol() + &quot;' in an empty spot!&quot;);</span>
+<span class="nc" id="L52">		System.out.print(&quot;Row: &quot;);</span>
+<span class="nc" id="L53">		current_player.setRow(scanner.nextInt()-1);</span>
+<span class="nc" id="L54">		System.out.print(&quot;Col: &quot;);</span>
+<span class="nc" id="L55">		current_player.setCol(scanner.nextInt()-1);</span>
+<span class="nc" id="L56">		return board.validateRowCol(current_player.getRow(), current_player.getCol());</span>
+	}
+	
+	private void showTitle() {
+<span class="nc" id="L60">		System.out.println(&quot;Tic Tac Toe \n&quot;);</span>
+<span class="nc" id="L61">		System.out.println(player_1.getName() + &quot; score: &quot; + player_1.getScore());</span>
+<span class="nc" id="L62">		System.out.println(player_2.getName() + &quot; score: &quot; + player_2.getScore());</span>
+<span class="nc" id="L63">		System.out.println(&quot;&quot;);</span>
+<span class="nc" id="L64">	}</span>
+	
+	public void changePlayer() {
+<span class="nc bnc" id="L67" title="All 2 branches missed.">		if(current_player == player_1) {</span>
+<span class="nc" id="L68">			this.current_player = player_2;</span>
+<span class="nc" id="L69">		}else {</span>
+<span class="nc" id="L70">			this.current_player = player_1;</span>
+		}
+<span class="nc" id="L72">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span>AllTests (2017-nov-14 09:28:25)</div></body></html>
