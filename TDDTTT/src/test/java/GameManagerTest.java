@@ -4,10 +4,9 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.doReturn;
+
 import org.junit.Before;
 import org.junit.Test;
-
 
 public class GameManagerTest {
 	GameManagerStub game_manager;
@@ -15,6 +14,84 @@ public class GameManagerTest {
 	@Before
 	public void setupTest() {
 		this.game_manager = new GameManagerStub();
+	}
+	
+	@Test
+	public void playOneRoundMultipleWrongInputsEndRoundTest() {
+		Board m_board = mock(Board.class);
+		Rules m_rules = mock(Rules.class);
+		UserInput m_user_input = mock(UserInput.class);
+		
+		GameManagerStub st_game_manager = new GameManagerStub(m_board, m_rules);
+		
+		when(st_game_manager.getUserRowCol(m_user_input)).thenReturn(false);
+		when(st_game_manager.getUserRowCol(m_user_input)).thenReturn(false);
+		when(st_game_manager.getUserRowCol(m_user_input)).thenReturn(true);
+		
+		when(st_game_manager.roundHasEnded()).thenReturn(true);
+		when(m_user_input.askUserForChar("Play again (yes=y/n=any key): ")).thenReturn('n');
+		
+		
+		st_game_manager.play(m_user_input);
+
+		verify(m_user_input, times(4)).askUserForInt("row: ");
+		verify(m_user_input, times(4)).askUserForInt("col: ");
+	}
+	
+	@Test
+	public void playOneRoundMultipleWrongInputsTestf() {
+		Board m_board = mock(Board.class);
+		Rules m_rules = mock(Rules.class);
+		UserInput m_user_input = mock(UserInput.class);
+		
+		GameManagerStub st_game_manager = new GameManagerStub(m_board, m_rules);
+
+		when(st_game_manager.getUserRowCol(m_user_input)).thenReturn(true);
+		
+		when(st_game_manager.roundHasEnded()).thenReturn(false);
+		
+		st_game_manager.play(m_user_input);
+
+		verify(m_user_input, times(2)).askUserForInt("row: ");
+		verify(m_user_input, times(2)).askUserForInt("col: ");
+	}
+	
+	@Test
+	public void roundHasEndedBecauseOfDrawTest() {
+		Board m_board = mock(Board.class);
+		Rules m_rules = mock(Rules.class);
+		
+		GameManagerStub st_game_manager = new GameManagerStub(m_board, m_rules);
+		
+		when(m_rules.playerWon(m_board)).thenReturn(false);
+		when(m_board.isFull()).thenReturn(true);
+		
+		assertTrue(st_game_manager.roundHasEnded());
+	}
+	
+	@Test
+	public void roundHasEndedBecauseOfPlayerWonTest() {
+		Board m_board = mock(Board.class);
+		Rules m_rules = mock(Rules.class);
+		
+		GameManagerStub st_game_manager = new GameManagerStub(m_board, m_rules);
+		
+		when(m_rules.playerWon(m_board)).thenReturn(true);
+		
+		assertTrue(st_game_manager.roundHasEnded());
+	}
+	
+	@Test
+	public void roundHasEndedFalseTest() {
+		Board m_board = mock(Board.class);
+		Rules m_rules = mock(Rules.class);
+		
+		GameManagerStub st_game_manager = new GameManagerStub(m_board, m_rules);
+		
+		when(m_rules.playerWon(m_board)).thenReturn(false);
+		when(m_board.isFull()).thenReturn(false);
+		
+		assertFalse(st_game_manager.roundHasEnded());
 	}
 	
 	@Test
@@ -63,8 +140,8 @@ public class GameManagerTest {
 			super(new Board(), new Rules(), new Player("Player 1", 'X'), new Player("Player 2", 'O'));
 		}
 		
-		public GameManagerStub(Board board) {
-			super(board, new Rules(), new Player("Player 1", 'X'), new Player("Player 2", 'O'));
+		public GameManagerStub(Board board, Rules rules) {
+			super(board, rules, new Player("Player 1", 'X'), new Player("Player 2", 'O'));
 		}
 		
 		public Player getCurrentPlayer() {

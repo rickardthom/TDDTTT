@@ -16,21 +16,21 @@ public class GameManager {
 		this.current_player = player_1;
 	}
 	
-	public void start() {
+	public void play(UserInput user_input) {
 		showTitle();
-		
-		while(game_active) {
-			board.printBoard();
-			while(!getUserRowCol(new UserInput(System.in, System.out)));
-			board.setSymbolAt(current_player.getRow(), current_player.getCol(), current_player.getSymbol());
+		board.printBoard();
+		while(!getUserRowCol(user_input));
+		board.setSymbolAt(current_player.getRow(), current_player.getCol(), current_player.getSymbol());
 			
-			if(roundHasEnded()) {
-				game_active = playAgain(new UserInput(System.in, System.out));
-			}
+		if(roundHasEnded()) {
+			game_active = playAgain(user_input);
+		}else {
+			changePlayer();
 		}
 	}
+
 	
-	private boolean roundHasEnded() {
+	protected boolean roundHasEnded() {
 		if (rules.playerWon(board)) {
 			System.out.println("\n" + current_player.getName() + " won!\n");
 			current_player.incrScore();
@@ -41,7 +41,6 @@ public class GameManager {
 			return true;
 			
 		}else {
-			changePlayer();
 			return false;
 		}
 	}
@@ -78,4 +77,7 @@ public class GameManager {
 		System.out.println("");
 	}
 	
+	public boolean isRunning() {
+		return game_active;
+	}
 }
