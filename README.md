@@ -1,3 +1,3 @@
 # TDDTTT
 
-https://rickardthom.github.io/TDDTTT/
+Code coverage: https://rickardthom.github.io/TDDTTT/
